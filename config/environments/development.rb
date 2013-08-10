@@ -26,4 +26,7 @@ Depot::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  
+  # Disable Rails's static asset server (Apache or nginx will already do this).
+  config.serve_static_assets = true
 end

@@ -27,7 +27,7 @@ class LineItemsController < ApplicationController
     @cart = current_cart
     product = Product.find(params[:product_id])
     @line_item = @cart.line_items.build(:product => product)
-    puts "Creating new line item!"
+    session[:counter] = 0
 
     respond_to do |format|
       if @line_item.save

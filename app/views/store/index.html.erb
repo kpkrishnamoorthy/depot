@@ -4,6 +4,9 @@
 
 <h1>Your Pragmatic Catalog</h1>
 <h2>We have <%= @products.count %> products!</h2>
+<% if session[:counter] > 5 then %>
+  <h3>You have visited this page <%= pluralize(session[:counter], "time") %></h3>
+<% end %>
 
 <% @products.each do |product| %>
   <div class="entry">
