@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  default_scope :order => 'title'
+  default_scope { order('title') } #  :order => 'title' is deprecated in Rails 4.0
   
   has_many :line_items
   before_destroy :ensure_not_referenced_by_any_line_item

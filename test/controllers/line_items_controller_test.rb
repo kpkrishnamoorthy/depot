@@ -24,6 +24,24 @@ class LineItemsControllerTest < ActionController::TestCase
     assert_redirected_to cart_path(assigns(:line_item).cart)
   end
 
+  test "should not create multiple line_items for one product" do
+    assert_difference('LineItem.count') do
+      10.times { post :create, :product_id => products(:ruby).id }
+    end
+
+    assert_redirected_to cart_path(assigns(:line_item).cart)
+  end
+
+  test "should create multiple line_items for unique products" do
+    assert_difference('LineItem.count', 3) do
+      post :create, :product_id => products(:one).id
+      post :create, :product_id => products(:two).id
+      post :create, :product_id => products(:ruby).id
+    end
+
+    assert_redirected_to cart_path(assigns(:line_item).cart)
+  end
+
   test "should show line_item" do
     get :show, id: @line_item
     assert_response :success
@@ -44,6 +62,6 @@ class LineItemsControllerTest < ActionController::TestCase
       delete :destroy, id: @line_item
     end
 
-    assert_redirected_to line_items_path
+    assert_redirected_to store_path
   end
 end
